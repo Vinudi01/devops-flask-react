@@ -4,7 +4,7 @@ function App() {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("/api/hello")
+    fetch("http://127.0.0.1:5000/api/hello")
       .then(res => res.json())
       .then(data => setMsg(data.message))
       .catch(() => setMsg("Backend not available"));
