@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test --coverage --watchAll=false",
+    "test": "react-scripts test",
     "build": "react-scripts build"
   }
 }
