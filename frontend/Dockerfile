@@ -1,13 +1,24 @@
-FROM node:18 AS build
+FROM node:18
+
 WORKDIR /app
-COPY package.json .
-#COPY package-lock.json .
+
+# Set environment development supaya devDependencies ikut terinstall
+ENV NODE_ENV=development
+
+# Copy package.json
+COPY package.json . 
+
+# Install dependencies
 RUN npm install
+
+# Copy seluruh kode
 COPY . .
+
+# Build React app
 RUN npm run build
 
-# Serve with nginx
+# Serve dengan nginx
 FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
