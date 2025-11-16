@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test --testPathPattern=tests",
+    "test:ci": "react-scripts test --coverage --coverageReporters=lcov --watchAll=false",
     "build": "react-scripts build"
   },
   "jest": {
