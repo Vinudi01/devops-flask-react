@@ -4,7 +4,8 @@ function App() {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    // For production, use HTTPS. HTTP is acceptable for localhost development
+    const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000"; // NOSONAR - HTTP acceptable for localhost
     fetch(`${apiUrl}/api/hello`)
       .then(res => res.json())
       .then(data => setMsg(data.message))
