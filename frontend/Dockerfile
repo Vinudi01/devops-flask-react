@@ -7,7 +7,7 @@ WORKDIR /app
 ENV NODE_ENV=development
 
 # Accept build argument for API URL
-ARG REACT_APP_API_URL=http://backend:5000
+ARG REACT_APP_API_URL=http://flask-backend:5000
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 # Copy package.json dan package-lock.json sebelum menginstall dependencies
