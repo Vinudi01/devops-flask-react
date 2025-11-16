@@ -1,20 +1,23 @@
-# Gunakan versi python 3.10 yang lebih spesifik
+# Gunakan image Python 3.10
 FROM python:3.10-slim
 
 # Tentukan direktori kerja di dalam container
 WORKDIR /app
 
-# Salin hanya file yang dibutuhkan untuk instalasi dependencies
+# Salin requirements.txt untuk install dependencies
 COPY requirements.txt .
 
-# Instal dependensi dari requirements.txt
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Salin file yang dibutuhkan saja (gunakan .dockerignore untuk mengecualikan file yang tidak perlu)
-COPY app.py .
+# Salin kode aplikasi backend
+COPY . .
 
-# Expose port 5000 (pastikan aplikasi Flask berjalan di port ini)
+# Expose port Flask (5000)
 EXPOSE 5000
 
-# Jalankan aplikasi Flask dengan python
+# Untuk menjalankan tes (optional, hanya jika ingin melakukan testing di dalam container)
+# CMD ["pytest", "--cov=app", "--cov-report=lcov", "--cov-report=xml"]
+
+# Jalankan aplikasi Flask
 CMD ["python", "app.py"]

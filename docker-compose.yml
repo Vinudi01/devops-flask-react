@@ -5,14 +5,23 @@ services:
     container_name: flask-backend
     ports:
       - "5000:5000"
+    # Menggunakan docker networking (default) agar frontend bisa mengakses backend via nama container
+    networks:
+      - app-network
 
   frontend:
     build:
       context: ./frontend
       args:
-        REACT_APP_API_URL: http://localhost:5000
+        REACT_APP_API_URL: http://flask-backend:5000  # Ganti localhost menjadi nama service backend
     container_name: react-frontend
     ports:
-      - "3000:80"
+      - "3000:80"  # Pastikan frontend dapat diakses pada port 3000
     depends_on:
       - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge  # Gunakan jaringan default agar frontend bisa mengakses backend

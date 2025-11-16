@@ -5,8 +5,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 # Configure CORS with specific origins for security
-# Allow localhost for development and specific origins for production
-allowed_origins = os.getenv('CORS_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000').split(',')
+# For production, use HTTPS and set CORS_ORIGINS environment variable
+# Example: CORS_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+# For development, HTTP is acceptable on localhost
+default_origins = 'http://localhost:3000,http://127.0.0.1:3000'  # NOSONAR - HTTP acceptable for localhost dev
+allowed_origins = os.getenv('CORS_ORIGINS', default_origins).split(',')
 CORS(app, origins=allowed_origins, supports_credentials=True)
 
 @app.route("/api/hello")
